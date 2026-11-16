@@ -123,7 +123,7 @@ opportunities: dict[int, dict[str, str]] = {
         "company": "Google",
         "role": "iOS Developer",
         "status": "Applied"
-    }, 
+    },
     54: {
         "company": "Microsoft",
         "role": "Backend Intern",
@@ -181,11 +181,14 @@ def show_opportunities():
 
 
 def filter_by_status(status: str):
+    filterResultCount = 0
     for opportunity in opportunities.values():
         if opportunity["status"].lower() == status.lower():
             print(f"Company: {opportunity['company']}\nRole: {opportunity['role']}\nStatus: {opportunity['status']}")
-        else:
-            print("No such opportunity available")
+            filterResultCount += 1
+
+    if filterResultCount == 0:
+        print("No such opportunity available")
     return
 
 
@@ -207,11 +210,6 @@ def count_by_status():
 
     
 def search_by_company(company: str):
-    if not opportunities:
-        print("No such opportunity available")
-        return
-    
-    
     compMatch: list[dict[str, str]] = []
 
     for opportunity in opportunities.values():
